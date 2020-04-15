@@ -29,14 +29,31 @@
         var y = canvas.height - 30;
         var dx = 2;
         var dy = -2;
+        var ballRadius = 10;
+        var rancolor = "red"
 
         function drawBall() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             ctx.arc(x, y, 10, 0, Math.PI * 2);
-            ctx.fillStyle = "green"
+            ctx.fillStyle = rancolor
             ctx.fill();
             ctx.closePath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            var r = Math.floor((Math.random() * 255) + 1);;
+            var g = Math.floor((Math.random() * 255) + 1);;
+            var b = Math.floor((Math.random() * 255) + 1);;
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+                rancolor = "rgb(" + r + "," + g + "," + b + ")"
+            }
+
+            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+                dy = -dy;
+                rancolor = "rgb(" + r + "," + g + "," + b + ")"
+            }
+
+
         }
 
 
@@ -47,6 +64,10 @@
             y += dy
         }
         setInterval(draw, 10);
+
+
+
+
     </script>
 
 </body>
